@@ -42,5 +42,8 @@ $result = array (
 $result = $gateway->checkStatus($check_id, TRUE, ',');
 //$result =  "0,Not yet processed,123456,234567";
 ```
+# Examples
+This repository contains an examples folder with a few files that should give a pretty comprehensive idea on how to use the main functions of this SDK to do things like create checks and view their status via API calls.
+
 # API Documentation
 Complete API documentation on all methods can be found at [Green's website](http://www.green.money/api) and you can contact [Customer Support](http://www.green.money/contact) with any questions about integration. When contacting support, please include in that email the name of the merchant you are with to speed up the process.
