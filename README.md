@@ -6,7 +6,7 @@ To be able to connect with Green Payment Processing, your server must have an SS
 
 PHP version 5 >= 5.0.1 or PHP version 7 required as some methods make use of the PHP SoapClient class to make calls.
 
-Our service supports the following protocols: HTTP POST/GET, SOAP 1.1 and SOAP 1.2. This PHP SDK uses POST (via cURL methods)1 for the majority of service calls, but relies on SoapClient where binary data must be sent securely.
+Our service supports the following protocols: HTTP POST/GET, SOAP 1.1 and SOAP 1.2. This PHP SDK uses POST (via cURL methods) for the majority of service calls, but relies on SoapClient where binary data must be sent securely.
 
 # Installation
 Installation is as easy as copying the Green.php file and including it in your server's files.
