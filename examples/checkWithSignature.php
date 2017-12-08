@@ -1,12 +1,12 @@
 <?php
 require_once '../Green.php';
 
-use Green;
+use Green\CheckGateway;
 
 $ClientID = "your_id"; //Your numeric Client_ID
 $ApiPassword = "your_password"; //Your system generated ApiPassword
 
-$gateway = new \Green\CheckGateway($ClientID, $ApiPassword); //Create the gatway using the Client_ID and Password combination
+$gateway = new Gateway($ClientID, $ApiPassword); //Create the gatway using the Client_ID and Password combination
 $gateway->testMode(); //Put the Gateway into testing mode so calls go to the Sandbox and you won't get charged!
 
 //Create a single check and get results back after verification in array format
