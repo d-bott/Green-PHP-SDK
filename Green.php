@@ -161,7 +161,7 @@ class CheckGateway
       } else {
         return $this->resultToArray($response, $options['x_delim_char'], $resultArray);
       }
-    } catch(Exception $e){
+    } catch(\Exception $e){
       $this->setLastError("An error occurred while attempting to parse the API result: ". $e->getMessage());
       return false;
     }
