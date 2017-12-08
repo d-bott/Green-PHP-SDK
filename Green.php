@@ -24,7 +24,7 @@ class CheckGateway
   private $live = false;
 
   const ENDPOINT = array(
-    "test" => "http://localhost:14543/echeck.asmx",
+    "test" => "http://cpsandbox.com/echeck.asmx",
     "live" => "https://greenbyphone.com/echeck.asmx"
   );
 
