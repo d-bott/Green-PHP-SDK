@@ -1,19 +1,22 @@
 <?php
 require_once '../Green.php';
 
+
 use Green\CheckGateway as Gateway;
+
 
 $ClientID = "your_client_id"; //Your numeric Client_ID
 $ApiPassword = "your_api_password"; //Your system generated ApiPassword
 
+
 $gateway = new Gateway($ClientID, $ApiPassword); //Create the gatway using the Client_ID and Password combination
 $gateway->testMode(); //Put the Gateway into testing mode so calls go to the Sandbox and you won't get charged!
 
-//Create a single check and get results back after verification in array format
+
+
+//Create a single bill pay
+
 $name = 'Testing Smith';
-$email = 'test@test.test';
-$phone = '323-232-3232';
-$phone_ext = '';
 $address1 = '123 Testing Lane';
 $address2 = '';
 $city = 'Testville';
@@ -26,7 +29,13 @@ $bank_name = 'Test Bank';
 $memo = 'Testing!';
 $amount = '10.00';
 $date = date("m/d/Y");
-$result = $gateway->singleCheck($name, $email, $phone, $phone_ext, $address1, $address2, $city, $state, $zip, $country, $routing, $account, $bank_name, $memo, $amount, $date);
+$check_number = '12322';
+$delim  = FALSE;
+$delim_char = ',';
+
+$result = $gateway->singleBillpay($name, $address1, $address2, $city, $state, $zip, $country, $routing, $account, $bank_name, $memo, $amount, $date, $check_number, $delim, $delim_char);
+
+
 
 if($result) {
   //The call succeeded, let's parse it out
@@ -42,6 +51,9 @@ if($result) {
 } else {
   //The call failed!
   echo "GATEWAY ERROR: " . $gateway->getLastError();
+
 }
+
+
 
 ?>
