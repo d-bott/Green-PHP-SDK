@@ -23,7 +23,7 @@ class CheckGateway
   private $live = false;
 
   const ENDPOINT = array(
-    "test" => "http://cpsandbox.com/echeck.asmx",
+    "test" => "https://cpsandbox.com/echeck.asmx",
     "live" => "https://greenbyphone.com/echeck.asmx"
   );
 
@@ -700,7 +700,7 @@ class CheckGateway
       "Address2" => $address2,
       "City" => $city,
       "State" => $state,
-      "Zip" => $Zip,
+      "Zip" => $zip,
       "Country" => $country,
       "RoutingNumber" => $routing,
       "AccountNumber" => $account,
@@ -880,9 +880,9 @@ class CheckGateway
       "ItemDescription" => $description,
       "Amount" => $amount,
       "PaymentDate" => $date,
-      "RecurringType" => $type,
-      "RecurringOffset" => $offset,
-      "RecurringPayments" => $payment,
+      "RecurringType" => $recur_type,
+      "RecurringOffset" => $recur_offset,
+      "RecurringPayments" => $recur_payments,
       "x_delim_data" => ($delim) ? "TRUE" : "",
       "x_delim_char" => $delim_char
     ), array(
