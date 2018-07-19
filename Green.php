@@ -139,9 +139,6 @@ class CheckGateway
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($options));
 
-      echo "Full Request Details<br/><pre>". http_build_query($options)."</pre><br/>";
-
-
       $response = curl_exec($ch);
 
       if($response === FALSE){
