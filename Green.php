@@ -38,7 +38,7 @@ class CheckGateway
   }
 
   public function setClientID($id) {
-    $this->$client_id = $id;
+    $this->client_id = $id;
   }
 
   public function getClientID(){
@@ -599,8 +599,6 @@ class CheckGateway
    */
   public function uploadCheckSignature($check_id, $image, $delim = FALSE, $delim_char = ","){
     return $this->requestSOAP("UploadSignatureImage", array(
-      'Client_ID'=>$Client_ID,
-      'ApiPassword'=>$ApiPassword,
       "Check_ID" => $check_id,
       "ImageData" => $image,
       "x_delim_data" => ($delim) ? "TRUE" : "",
@@ -745,7 +743,7 @@ class CheckGateway
       "Address2" => $address2,
       "City" => $city,
       "State" => $state,
-      "Zip" => $Zip,
+      "Zip" => $zip,
       "Country" => $country,
       "CheckMemo" => $memo,
       "CheckAmount" => $amount,
@@ -773,6 +771,9 @@ class CheckGateway
    * @param string  $state          Customer's 2-character state abbreviation (ex. NY, CA, GA, etc.)
    * @param string  $zip            Customer's 5-digit or 9-digit zip code in the format ##### or #####-####
    * @param string  $country        Customer's 2-character country code, ex. "US"
+   * @param string  $routing        Customer's routing number for their bank account. Optional.
+   * @param string  $account        Customer's account number for their bank account. Optional.
+   * @param string  $bank           The name of the customer's bank. Optional but should be supplied if routing and account are supplied.
    * @param string  $memo           Memo to appear on the check
    * @param string  $amount         Check amount in the format ##.##. Do not include monetary symbols
    * @param string  $date           The date for the first check in the format mm/dd/yyyy. Valid values range from 2 months prior to 1 year forward from current date
@@ -785,14 +786,14 @@ class CheckGateway
    *
    * @return mixed                  Returns associative array or delimited string on success OR cURL error string on failure
    */
-  public function recurringBillpay($name, $address1, $address2, $city, $state, $zip, $country, $memo, $amount, $date, $recur_type, $recur_offset, $recur_payments, $check_number = '', $delim = FALSE, $delim_char = ","){
+  public function recurringBillpay($name, $address1, $address2, $city, $state, $zip, $country, $routing, $account, $bank, $memo, $amount, $date, $recur_type, $recur_offset, $recur_payments, $check_number = '', $delim = FALSE, $delim_char = ","){
     return $this->request("RecurringBillPayCheck", array(
       "Name" => $name,
       "Address1" => $address1,
       "Address2" => $address2,
       "City" => $city,
       "State" => $state,
-      "Zip" => $Zip,
+      "Zip" => $zip,
       "Country" => $country,
       "RoutingNumber" => $routing,
       "AccountNumber" => $account,
@@ -831,7 +832,7 @@ class CheckGateway
     */
   public function singleInvoice($payor_name, $email, $item_name, $item_description, $amount, $date, $delim = FALSE, $delim_char = ","){
     return $this->request("OneTimeInvoice", array(
-      "PayorName" => $payor_name,
+      "CustomerName" => $payor_name,
       "EmailAddress" => $email,
       "ItemName" => $item_name,
       "ItemDescription" => $item_description,
@@ -871,10 +872,10 @@ class CheckGateway
     */
   public function recurringInvoice($payor_name, $email, $item_name, $item_description, $amount, $date, $recur_type, $recur_offset, $recur_payments, $delim = FALSE, $delim_char = ","){
     return $this->request("RecurringInvoice", array(
-      "PayorName" => $payor_name,
+      "CustomerName" => $payor_name,
       "EmailAddress" => $email,
-      "ItemName" => $item,
-      "ItemDescription" => $description,
+      "ItemName" => $item_name,
+      "ItemDescription" => $item_description,
       "Amount" => $amount,
       "PaymentDate" => $date,
       "RecurringType" => $recur_type,
@@ -916,7 +917,7 @@ class CheckGateway
    */
   public function combinationInvoice($payor_name, $email, $item_name, $item_description, $init_amount, $init_date, $recur_amount, $recur_init_date, $recur_type, $recur_offset, $recur_payments, $delim = FALSE, $delim_char = ","){
     return $this->request("CombinationInvoice", array(
-      "PayorName" => $payor_name,
+      "CustomerName" => $payor_name,
       "EmailAddress" => $email,
       "ItemName" => $item_name,
       "ItemDescription" => $item_description,
