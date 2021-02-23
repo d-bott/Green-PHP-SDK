@@ -10,7 +10,6 @@ $ApiPassword = "your_api_password"; //Your system generated ApiPassword
 
 
 $gateway = new Gateway($ClientID, $ApiPassword); //Create the gatway using the Client_ID and Password combination
-$gateway->testMode(); //Put the Gateway into testing mode so calls go to the Sandbox and you won't get charged!
 
 
 
