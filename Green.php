@@ -10,7 +10,7 @@ namespace Green;
  *  Verification Mode - requests to our API can run in either Real Time or Batch Mode.
  *    Batch - Calls made will return immediately with a success message stating the check was received. eVerification (and Phone or other verification as needed by your merchant account settings) will run at a later time requiring a separate call to CheckStatus to tell if a check has been verified/processed/etc.
  *    Real Time - (default) Calls made will insert the check(s) and immediately run eVerification (and other verification if specified by your merchant account) and will return a result stating whether the check passed or failed verification. This is the default mode and most merchants will only use this mode.
- *  EndPoint - the mode in which calls are made. You can make calls to our "test" sandbox or directly to our "live" system.
+ *  EndPoint - the API URL to which calls are made.
  */
 class CheckGateway
 {
@@ -19,22 +19,15 @@ class CheckGateway
   private $endpoint = "";
   private $error = "";
 
-  /** @var bool $live Specifies whether this Gateway should make calls to the live API or to the Sandbox */
-  private $live = false;
-
-  const ENDPOINT = array(
-    "test" => "https://cpsandbox.com/echeck.asmx",
-    "live" => "https://greenbyphone.com/echeck.asmx"
-  );
+  const ENDPOINT = "https://greenbyphone.com/echeck.asmx";
 
   /***
   Standard constructor
   ***/
-  function __construct($client_id, $api_pass, $live = true){
+  function __construct($client_id, $api_pass){
     $this->client_id = $client_id;
     $this->api_pass = $api_pass;
-    $this->live = $live;
-    $this->setEndpoint();
+    $this->endpoint = self::ENDPOINT;
   }
 
   public function setClientID($id) {
@@ -53,26 +46,8 @@ class CheckGateway
     return $this->api_pass;
   }
 
-  public function setEndpoint() {
-    if($this->live){
-      $this->endpoint = self::ENDPOINT['live'];
-    } else {
-      $this->endpoint = self::ENDPOINT['test'];
-    }
-  }
-
   public function getEndpoint(){
     return $this->endpoint;
-  }
-
-  public function liveMode(){
-    $this->live = true;
-    $this->setEndpoint();
-  }
-
-  public function testMode(){
-    $this->live = false;
-    $this->setEndpoint();
   }
 
   function __toString(){
